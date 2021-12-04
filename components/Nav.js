@@ -15,6 +15,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import DarkModeSwitch from "./DarkModeSwitch.js";
 
 export default function Nav() {
+
   const [web3, setWeb3] = useState(null);
   const [account, setAccount] = useState(null);
   const [chainId, setChainId] = useState(null);
@@ -22,7 +23,7 @@ export default function Nav() {
 
   useEffect(() => {
     connect();
-
+    if(window.ethereum) {
     ethereum.on("accountsChanged", function (accounts) {
       connect();
       console.log("changed!");
@@ -40,6 +41,7 @@ export default function Nav() {
       setChainId(null)
       setProvider(null)
     });
+  }
 
   }, []);
 
@@ -49,7 +51,7 @@ export default function Nav() {
       walletconnect: {
         package: WalletConnectProvider, // required
         options: {
-          infuraId: "f0d8e56e0aeb4a8594192dc550f05a2d" // required
+          infuraId: "26e178ea568e492983f2431ad6a31e74" // required
         }
       }
     };
